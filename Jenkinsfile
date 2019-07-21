@@ -26,7 +26,7 @@ pipeline {
    
     stage('push image to ECR'){
       steps {
-       withDockerRegistry(credentialsId: 'ecr:ap-southt-1:aws-credentials', url: 'http://263970263787.dkr.ecr.ap-south-1.amazonaws.com/employee-service') {
+       withDockerRegistry(credentialsId: 'ecr:ap-southt-1:aws-credentials', url: 'http://263970263787.dkr.ecr.ap-south-1.amazonaws.com/address-service') {
           sh 'docker tag address-service:latest 263970263787.dkr.ecr.ap-south-1.amazonaws.com/address-service:latest'
           sh 'docker push 263970263787.dkr.ecr.ap-south-1.amazonaws.com/address-service:latest'
         } 
