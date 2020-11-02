@@ -26,13 +26,13 @@ pipeline {
    
     stage('push image to ECR'){
       steps {
-       withDockerRegistry(credentialsId: 'ecr:ap-south-1:aws-credentials', url: 'http://263970263787.dkr.ecr.ap-south-1.amazonaws.com/address-service:latest') {
-          sh 'docker tag address-service:latest 263970263787.dkr.ecr.ap-south-1.amazonaws.com/address-service:latest'
-          sh 'docker push 263970263787.dkr.ecr.ap-south-1.amazonaws.com/address-service:latest'
+       withDockerRegistry(credentialsId: 'ecr:us-east-1:5e8f8e1c-63d5-4626-a902-5b34484d8c93', url: 'http://224605180493.dkr.ecr.us-east-1.amazonaws.com/address-service') {
+          sh 'docker tag address-service:latest 224605180493.dkr.ecr.us-east-1.amazonaws.com/address-service:v1'
+          sh 'docker push 224605180493.dkr.ecr.us-east-1.amazonaws.com/address-service:v1'
         } 
       }
     }
-  stage('deploy to ECR') {
+  stage('deploy to Eks') {
       steps {
         node('eks-master-node'){
           checkout scm
