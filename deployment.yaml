@@ -2,6 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: address-service 
+  namespace: 2048-game
 spec:
   replicas: 1
   template:
@@ -14,3 +15,17 @@ spec:
         image: 263970263787.dkr.ecr.ap-south-1.amazonaws.com/address-service:latest
         ports:
         - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: address-service 
+  namespace: 2048-game
+  labels:
+    name: address-service   
+spec:
+  ports:
+    - port: 8083
+  selector:
+    app: address-service
+  type: NodePort
