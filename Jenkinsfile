@@ -35,9 +35,12 @@ pipeline {
     }
   stage('deploy to Eks') {
       steps {
+          kubernetesDeploy configs: '.kube/config', enableConfigSubstitution: false, kubeConfig: [path: ''], kubeconfigId: 'kubeconfig', secretName: '', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://10.10.40.224']
+        {
          sh 'kubectl apply -f deployment.yaml --namespace=2048-game' 
          sh 'kubectl apply -f service.yaml--namespace=2048-game'
         }
       }
     } 
   }
+}
